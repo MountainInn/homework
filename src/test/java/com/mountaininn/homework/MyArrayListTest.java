@@ -57,27 +57,25 @@ class MyArrayListTest {
 
     @Test
     void testAdd() {
-        Integer[] example = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        ArrayList<Integer> example = new ArrayList<>(15);
 
         for (int i = 1; i <= 10; i++) {
-            if (i != 5 && i != 10)
+            if (i != 5 && i != 10) {
                 arrayList.add(i);
+            }
+                example.add(i);
         }
+        assertEquals(10, arrayList.capacity());
 
         arrayList.add(4, 5);
         arrayList.add(9, 10);
 
-        assertArrayEquals(example, arrayList.toArray());
+        for (int i = 0; i < 5; i++) {
+            example.add(i, i);
+            arrayList.add(i, i);
+        }
 
-        example = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-
-        arrayList.add(10, 11);
-        arrayList.add(11, 12);
-        arrayList.add(12, 13);
-        arrayList.add(13, 14);
-        arrayList.add(14, 15);
-
-        assertArrayEquals(example, arrayList.toArray());
+        assertArrayEquals(example.toArray(), arrayList.toArray());
     }
 
     @Test

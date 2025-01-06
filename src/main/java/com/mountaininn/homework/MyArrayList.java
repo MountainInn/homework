@@ -50,13 +50,16 @@ public class MyArrayList<T> {
 
     /**
      * Добавляет элемент в массив по указанному индексу, сдвигая элементы вправо, чтобы освободить место.
-     * Расширяет подлежащий массив, если index или size превосходят capacity.
+     * Расширяет подлежащий массив, если index указывает на последний элемент.
      * @param index - индекс, по которому добавляется новый элемент
      * @param element - элемент для добавления
+     * @throws IndexOutOfBoundsException если index меньше 0 или больше чем длина подлежащего массива
      */
     public void add(int index, T element) {
-        int preferredLength = Math.max(index, size);
-        maybeGrowTo(preferredLength);
+        if (index < 0 || isOutOfBounds(index))
+            throw new IndexOutOfBoundsException();
+
+        maybeGrowTo(index+1);
 
         int shiftLength = (capacity() - 1 - index);
         System.arraycopy(array, index, array, index + 1, shiftLength);
@@ -66,13 +69,36 @@ public class MyArrayList<T> {
     }
 
     /**
+     * Удаляет элемент по указанному индексу и возвращает его.
+     * Сдвигает элементы влево, чтобы не оставить пустой ячейки.
+     * @param index Индекс для удаления элемента.
+     * @throws IndexOutOfBoundsException
+     */
+    public T remove(int index) {
+        if (isOutOfBounds(index)) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        T result = (T) array[index];
+
+        int shiftLength = (capacity() - 1 - index);
+        System.arraycopy(array, index + 1, array, index, shiftLength);
+
+        size--;
+        array[size] = null;
+
+        return result;
+    }
+
+    /**
      * Метод для получения элемента по индексу.
      * @param index Индекс элемента, который хотим получить.
      * @return Объект по заданному индексу, либо null, если индекс за пределами массива.
+     * @throws IndexOutOfBoundsException
      */
     public T get(int index) {
-        if (isOutOfBounds(index)) {
-            return null;
+        if (index < 0 || isOutOfBounds(index)) {
+            throw new IndexOutOfBoundsException();
         }
         return (T) array[index];
     }
@@ -83,30 +109,31 @@ public class MyArrayList<T> {
      * @param element Элемент для вставки
      */
     public void set(int index, T element) {
-        maybeGrowTo(index);
+        if (index < 0 || isOutOfBounds(index)) {
+            throw new IndexOutOfBoundsException();
+        }
         array[index] = element;
     }
 
-    /**
-     * Проверяет нужно ли расширить массив и, если да - расширяет его.
-     * @param preferredCapacity Необходимая длина массива.
-     *                          Если превосходит текущую capacity, то массив расширяется.
-     */
-    private void maybeGrowTo(int preferredCapacity) {
-        if (isOutOfBounds(preferredCapacity)) {
-            grow(preferredCapacity);
-        }
-    }
 
     /**
-     * Проверяет, входит ли указанный индекс в capacity массива.
-     * @param index индекс, который мы проверяем
-     * @return true - если индекс >= capacity, в другом случае - false
+     * Проверяет что индекс входит в диапазон от 0 до длины подлежащего массива.
+     * @param index индекс, который мы проверяем.
+     * @return true - если входит в диапазон, если нет - false.
      */
     private boolean isOutOfBounds(int index) {
-        return (index >= capacity());
+        return (index < 0 || index >= capacity());
     }
-
+    /**
+     * Проверяет нужно ли расширить массив и, если да - расширяет его.
+     * @param requiredCapacity Необходимая длина массива.
+     *                          Если превосходит текущую capacity, то массив расширяется.
+     */
+    private void maybeGrowTo(int requiredCapacity) {
+        if (requiredCapacity >= capacity()) {
+            grow(requiredCapacity);
+        }
+    }
     /**
      * Умножает длину массива на 1.5, до тех пор пока requiredCapacity не войдет в эту длину.
      * Создает новый массив увеличенной длины, с копированием элементов из старого массива.
@@ -120,24 +147,6 @@ public class MyArrayList<T> {
         while (newCapacity < requiredCapacity);
 
         array = Arrays.copyOf(array, newCapacity);
-    }
-
-    /**
-     * Удаляет элемент по указанному индексу.
-     * Сдвигает элементы влево, чтобы не оставить пустой ячейки.
-     * Если индекс за пределами массива, то ничего не делает.
-     * @param index Индекс для удаления элемента.
-     */
-    public void remove(int index) {
-        if (isOutOfBounds(index)) {
-            return;
-        }
-
-        int shiftLength = (capacity() - 1 - index);
-        System.arraycopy(array, index + 1, array, index, shiftLength);
-
-        size--;
-        array[size] = null;
     }
 
     /**
