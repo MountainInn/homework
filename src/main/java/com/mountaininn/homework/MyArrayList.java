@@ -6,8 +6,9 @@ import java.util.stream.Collectors;
 
 /**
  * Личная реализация класса ArrayList<T>.
- * @author MountainInn (Зиятдинов Евгений)
+ *
  * @param <T> Тип элементов массива
+ * @author MountainInn (Зиятдинов Евгений)
  */
 public class MyArrayList<T> {
     private Object[] array;
@@ -54,7 +55,8 @@ public class MyArrayList<T> {
     /**
      * Добавляет элемент в массив по указанному индексу, сдвигая элементы вправо, чтобы освободить место.
      * Расширяет подлежащий массив, если index указывает на последний элемент.
-     * @param index - индекс, по которому добавляется новый элемент
+     *
+     * @param index   - индекс, по которому добавляется новый элемент
      * @param element - элемент для добавления
      * @throws IndexOutOfBoundsException если index меньше 0 или больше чем длина подлежащего массива
      */
@@ -62,7 +64,7 @@ public class MyArrayList<T> {
         if (index < 0 || isOutOfBounds(index))
             throw new IndexOutOfBoundsException();
 
-        maybeGrowTo(index+1);
+        maybeGrowTo(index + 1);
 
         int shiftLength = (capacity() - 1 - index);
         System.arraycopy(array, index, array, index + 1, shiftLength);
@@ -74,6 +76,7 @@ public class MyArrayList<T> {
     /**
      * Удаляет элемент по указанному индексу и возвращает его.
      * Сдвигает элементы влево, чтобы не оставить пустой ячейки.
+     *
      * @param index Индекс для удаления элемента.
      * @throws IndexOutOfBoundsException
      */
@@ -95,6 +98,7 @@ public class MyArrayList<T> {
 
     /**
      * Метод для получения элемента по индексу.
+     *
      * @param index Индекс элемента, который хотим получить.
      * @return Объект по заданному индексу, либо null, если индекс за пределами массива.
      * @throws IndexOutOfBoundsException
@@ -108,7 +112,8 @@ public class MyArrayList<T> {
 
     /**
      * Вставляет элемент по указанному индексу с заменой предыдущего значения.
-     * @param index Индекс по которому вставляем элемент
+     *
+     * @param index   Индекс по которому вставляем элемент
      * @param element Элемент для вставки
      */
     public void set(int index, T element) {
@@ -121,25 +126,30 @@ public class MyArrayList<T> {
 
     /**
      * Проверяет что индекс входит в диапазон от 0 до длины подлежащего массива.
+     *
      * @param index индекс, который мы проверяем.
      * @return true - если входит в диапазон, если нет - false.
      */
     private boolean isOutOfBounds(int index) {
         return (index < 0 || index >= capacity());
     }
+
     /**
      * Проверяет нужно ли расширить массив и, если да - расширяет его.
+     *
      * @param requiredCapacity Необходимая длина массива.
-     *                          Если превосходит текущую capacity, то массив расширяется.
+     *                         Если превосходит текущую capacity, то массив расширяется.
      */
     private void maybeGrowTo(int requiredCapacity) {
         if (requiredCapacity >= capacity()) {
             grow(requiredCapacity);
         }
     }
+
     /**
      * Умножает длину массива на 1.5, до тех пор пока requiredCapacity не войдет в эту длину.
      * Создает новый массив увеличенной длины, с копированием элементов из старого массива.
+     *
      * @param requiredCapacity Длина, которую мы хотим получить от массива
      */
     private void grow(int requiredCapacity) {
@@ -164,6 +174,7 @@ public class MyArrayList<T> {
 
     /**
      * Сортирует массив, используя comparator.
+     *
      * @param comparator Компаратор элементов массива.
      */
     public void sort(Comparator<T> comparator) {

@@ -2,7 +2,6 @@ package com.mountaininn.homework;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,7 +62,7 @@ class MyArrayListTest {
             if (i != 5 && i != 10) {
                 arrayList.add(i);
             }
-                example.add(i);
+            example.add(i);
         }
         assertEquals(10, arrayList.capacity());
 
