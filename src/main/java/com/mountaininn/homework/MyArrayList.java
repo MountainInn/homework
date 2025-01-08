@@ -33,13 +33,15 @@ public class MyArrayList<T> {
         array = new Object[length];
     }
 
-    public MyArrayList(T[] array){
+    public MyArrayList(T[] array) {
         this.array = array;
+        this.size = array.length;
     }
 
     /**
      * Добавляет элемент в конец массива, предварительно проверяя, достаточно ли в массиве места.
      * Если недостаточно, то создается новый массив увеличенной длины, с копированием элементов из старого массива.
+     *
      * @param element Объект для добавления в конец массива
      */
     public void add(T element) {
