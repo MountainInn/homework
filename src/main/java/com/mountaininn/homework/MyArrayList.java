@@ -2,6 +2,7 @@ package com.mountaininn.homework;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 /**
  * Личная реализация класса ArrayList<T>.
@@ -174,6 +175,14 @@ public class MyArrayList<T> {
      */
     public T[] toArray() {
         return (T[]) array.clone();
+    }
+
+    @Override
+    public String toString() {
+        return Arrays
+                .stream(array)
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 }
 
