@@ -5,7 +5,7 @@ import java.util.random.RandomGenerator;
 
 public class SortingAlgorithms {
 
-    public static <T> void quickSort(MyArrayList<T> myArrayList, int low, int high, Comparator<T> comparator) {
+    public static <E> void quickSort(MyArrayList<E> myArrayList, int low, int high, Comparator<E> comparator) {
         if (low < high) {
             int p = partition(myArrayList, low, high, comparator);
             quickSort(myArrayList, low, p, comparator);
@@ -13,12 +13,12 @@ public class SortingAlgorithms {
         }
     }
 
-    private static <T> int partition(MyArrayList<T> list, int low, int high, Comparator<T> comparator) {
+    private static <E> int partition(MyArrayList<E> list, int low, int high, Comparator<E> comparator) {
         int randomIndex = RandomGenerator.getDefault().nextInt(low, high);
         int i = low;
         int j = high;
-        T pivot = list.get(randomIndex);
-        T lesser, greater;
+        E pivot = list.get(randomIndex);
+        E lesser, greater;
         while (true) {
             while (i <= high && comparator.compare(list.get(i), pivot) < 0) {
                 i++;

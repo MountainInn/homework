@@ -5,12 +5,12 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 /**
- * Личная реализация класса ArrayList<T>.
+ * Личная реализация класса ArrayList<E>.
  *
- * @param <T> Тип элементов массива
+ * @param <E> Тип элементов массива
  * @author MountainInn (Зиятдинов Евгений)
  */
-public class MyArrayList<T> {
+public class MyArrayList<E> {
     private Object[] array;
     private int size;
 
@@ -35,7 +35,7 @@ public class MyArrayList<T> {
         array = new Object[length];
     }
 
-    public MyArrayList(T[] array) {
+    public MyArrayList(E[] array) {
         this.array = array;
         this.size = array.length;
     }
@@ -46,7 +46,7 @@ public class MyArrayList<T> {
      *
      * @param element Объект для добавления в конец массива
      */
-    public void add(T element) {
+    public void add(E element) {
         maybeGrowTo(size);
         array[size] = element;
         size++;
@@ -60,7 +60,7 @@ public class MyArrayList<T> {
      * @param element - элемент для добавления
      * @throws IndexOutOfBoundsException если index меньше 0 или больше чем длина подлежащего массива
      */
-    public void add(int index, T element) {
+    public void add(int index, E element) {
         if (index < 0 || isOutOfBounds(index))
             throw new IndexOutOfBoundsException();
 
@@ -80,12 +80,12 @@ public class MyArrayList<T> {
      * @param index Индекс для удаления элемента.
      * @throws IndexOutOfBoundsException
      */
-    public T remove(int index) {
+    public E remove(int index) {
         if (isOutOfBounds(index)) {
             throw new IndexOutOfBoundsException();
         }
 
-        T result = (T) array[index];
+        E result = (E) array[index];
 
         int shiftLength = (capacity() - 1 - index);
         System.arraycopy(array, index + 1, array, index, shiftLength);
@@ -103,11 +103,11 @@ public class MyArrayList<T> {
      * @return Объект по заданному индексу, либо null, если индекс за пределами массива.
      * @throws IndexOutOfBoundsException
      */
-    public T get(int index) {
+    public E get(int index) {
         if (index < 0 || isOutOfBounds(index)) {
             throw new IndexOutOfBoundsException();
         }
-        return (T) array[index];
+        return (E) array[index];
     }
 
     /**
@@ -116,7 +116,7 @@ public class MyArrayList<T> {
      * @param index   Индекс по которому вставляем элемент
      * @param element Элемент для вставки
      */
-    public void set(int index, T element) {
+    public void set(int index, E element) {
         if (index < 0 || isOutOfBounds(index)) {
             throw new IndexOutOfBoundsException();
         }
@@ -177,15 +177,15 @@ public class MyArrayList<T> {
      *
      * @param comparator Компаратор элементов массива.
      */
-    public void sort(Comparator<T> comparator) {
-        Arrays.sort((T[]) array, comparator);
+    public void sort(Comparator<E> comparator) {
+        Arrays.sort((E[]) array, comparator);
     }
 
     /**
      * @return Копия подлежащего массива.
      */
-    public T[] toArray() {
-        return (T[]) array.clone();
+    public E[] toArray() {
+        return (E[]) array.clone();
     }
 
     @Override
