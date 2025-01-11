@@ -15,6 +15,28 @@ class MyArrayListTest {
     }
 
     @Test
+    void quickSort_ComparableString() {
+        String[] unsortedArray = new String[]{"as", "a", "asdfjk", "asdfjkl;", "asdf", "asd", "asdfjkl", "asdfj"};
+        String[] sortedArray = new String[]{"a", "as", "asd", "asdf", "asdfj", "asdfjk", "asdfjkl", "asdfjkl;"};
+        MyArrayList<String> list = new MyArrayList<>(unsortedArray);
+
+        SortingAlgorithms.quickSort(list, 0, list.size()-1);
+        System.out.println(list);
+        assertArrayEquals(sortedArray, list.toArray());
+    }
+
+    @Test
+    void quickSort_ComparableInteger() {
+        Integer[] unsortedArray = new Integer[]{0, 13, 4, 19, 12, 2, 6, 8, 1, 17, 10, 5, 9, 11, 3, 18, 15, 14, 16, 7};
+        Integer[] sortedArray = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
+        MyArrayList<Integer> list = new MyArrayList<>(unsortedArray);
+
+        SortingAlgorithms.quickSort(list, 0, list.size()-1);
+        System.out.println(list);
+        assertArrayEquals(sortedArray, list.toArray());
+    }
+
+    @Test
     void quickSort() {
         Integer[] unsortedArray = new Integer[]{0, 13, 4, 19, 12, 2, 6, 8, 1, 17, 10, 5, 9, 11, 3, 18, 15, 14, 16, 7};
         Integer[] sortedArray = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
