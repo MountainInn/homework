@@ -20,7 +20,7 @@ class MyArrayListTest {
         String[] sortedArray = new String[]{"a", "as", "asd", "asdf", "asdfj", "asdfjk", "asdfjkl", "asdfjkl;"};
         MyArrayList<String> list = new MyArrayList<>(unsortedArray);
 
-        SortingAlgorithms.quickSort(list, 0, list.size()-1);
+        SortingAlgorithms.quickSort(list);
         System.out.println(list);
         assertArrayEquals(sortedArray, list.toArray());
     }
@@ -31,7 +31,7 @@ class MyArrayListTest {
         Integer[] sortedArray = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
         MyArrayList<Integer> list = new MyArrayList<>(unsortedArray);
 
-        SortingAlgorithms.quickSort(list, 0, list.size()-1);
+        SortingAlgorithms.quickSort(list);
         System.out.println(list);
         assertArrayEquals(sortedArray, list.toArray());
     }
@@ -42,7 +42,7 @@ class MyArrayListTest {
         Integer[] sortedArray = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
         MyArrayList<Integer> list = new MyArrayList<>(unsortedArray);
 
-        SortingAlgorithms.quickSort(list, 0, list.size()-1, new MyIntegerComparator());
+        SortingAlgorithms.quickSort(list, new MyIntegerComparator());
         System.out.println(list);
         assertArrayEquals(sortedArray, list.toArray());
     }
@@ -53,7 +53,7 @@ class MyArrayListTest {
         String[] sortedArray = new String[]{"a", "as", "asd", "asdf", "asdfj", "asdfjk", "asdfjkl", "asdfjkl;"};
         MyArrayList<String> list = new MyArrayList<>(unsortedArray);
 
-        SortingAlgorithms.quickSort(list, 0, list.size()-1, new StringLengthComparator());
+        SortingAlgorithms.quickSort(list, new StringLengthComparator());
         System.out.println(list);
         assertArrayEquals(sortedArray, list.toArray());
     }

@@ -5,14 +5,39 @@ import java.util.random.RandomGenerator;
 
 public class SortingAlgorithms {
 
-    public static <E> void quickSort(MyArrayList<E> myArrayList, int low, int high, Comparator<E> comparator) {
+    /**
+     * Входная точка для Comparator версии quicksort, без явного указания параметров low и high.
+     * @param list Список который нужно отсортировать.
+     * @param comparator Компаратор, используемый для сортировки.
+     * @param <E> Дженерик тип элементов массива. Должен реализовывать Comparable<E>.
+     */
+    public static <E> void quickSort(MyArrayList<E> list, Comparator<E> comparator) {
+        quickSort(list, 0, list.size()-1, comparator);
+    }
+    /**
+     * Входная точка для Comparator версии quicksort.
+     * @param list Список который нужно отсортировать.
+     * @param low Начальный индекс диапазона для сортировки.
+     * @param high Конечный индекс диапазона для сортировки.
+     * @param comparator Компаратор, используемый для сортировки.
+     * @param <E> Дженерик тип элементов массива.
+     */
+    public static <E> void quickSort(MyArrayList<E> list, int low, int high, Comparator<E> comparator) {
         if (low < high) {
-            int p = partition(myArrayList, low, high, comparator);
-            quickSort(myArrayList, low, p, comparator);
-            quickSort(myArrayList, p + 1, high, comparator);
+            int p = partition(list, low, high, comparator);
+            quickSort(list, low, p, comparator);
+            quickSort(list, p + 1, high, comparator);
         }
     }
-
+    /**
+     * Версия quicksort, использующая Comparator.
+     * @param list Список который нужно отсортировать.
+     * @param low Начальный индекс диапазона для сортировки.
+     * @param high Конечный индекс диапазона для сортировки.
+     * @param comparator Компаратор, используемый для сортировки.
+     * @return Возвращает индекс, делящий массив на две части.
+     * @param <E> Дженерик тип элементов массива.
+     */
     private static <E> int partition(MyArrayList<E> list, int low, int high, Comparator<E> comparator) {
         int randomIndex = RandomGenerator.getDefault().nextInt(low, high);
         int i = low;
@@ -37,14 +62,38 @@ public class SortingAlgorithms {
         }
     }
 
-    public static <E extends Comparable<E>> void quickSort(MyArrayList<E> myArrayList, int low, int high) {
+    /**
+     * Входная точка для Comparable версии quicksort, без явного указания параметров low и high.
+     * @param myArrayList Список который нужно отсортировать.
+     * @param <E> Дженерик тип элементов массива. Должен реализовывать Comparable<E>.
+     */
+    public static <E extends Comparable<E>> void quickSort(MyArrayList<E> myArrayList) {
+        quickSort(myArrayList, 0, myArrayList.size()-1);
+    }
+
+    /**
+     * Входная точка для Comparable версии quicksort.
+     * @param list Список который нужно отсортировать.
+     * @param low Начальный индекс диапазона для сортировки.
+     * @param high Конечный индекс диапазона для сортировки.
+     * @param <E> Дженерик тип элементов массива. Должен реализовывать Comparable<E>.
+     */
+    public static <E extends Comparable<E>> void quickSort(MyArrayList<E> list, int low, int high) {
         if (low < high) {
-            int p = partition(myArrayList, low, high);
-            quickSort(myArrayList, low, p);
-            quickSort(myArrayList, p + 1, high);
+            int p = partition(list, low, high);
+            quickSort(list, low, p);
+            quickSort(list, p + 1, high);
         }
     }
 
+    /**
+     * Версия quicksort, использующая Comparable.
+     * @param list Список который нужно отсортировать.
+     * @param low Начальный индекс диапазона для сортировки.
+     * @param high Конечный индекс диапазона для сортировки.
+     * @return Возвращает индекс, делящий массив на две части.
+     * @param <E> Дженерик тип элементов массива. Должен реализовывать Comparable<E>.
+     */
     private static <E extends Comparable<E>> int partition(MyArrayList<E> list, int low, int high) {
         int randomIndex = RandomGenerator.getDefault().nextInt(low, high);
         int i = low;
