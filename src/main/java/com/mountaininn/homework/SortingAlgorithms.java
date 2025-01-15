@@ -9,7 +9,7 @@ public class SortingAlgorithms {
      * Входная точка для Comparator версии quicksort, без явного указания параметров low и high.
      * @param list Список который нужно отсортировать.
      * @param comparator Компаратор, используемый для сортировки.
-     * @param <E> Дженерик тип элементов массива. Должен реализовывать Comparable<E>.
+     * @param <E> Дженерик тип элементов массива.
      */
     public static <E> void quickSort(MyArrayList<E> list, Comparator<E> comparator) {
         quickSort(list, 0, list.size()-1, comparator);
